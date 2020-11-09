@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +51,7 @@
 
                 <hr>
 
-                <span  th:if="${data != null && data.name == 'ERROR'}">
+                <span th:if="${data != null && data.name == 'ERROR'}">
                     Invalid zip code. Weather data not found.
                 </span>
                 <div th:if="${data != null && data.name != 'ERROR'}">
@@ -66,6 +84,19 @@
 
                     </div>
                 </div>
+
+
+                <table>
+                    <tr>
+                        <th>Zip ID</th>
+                        <th>Zip Codes</th>
+                    </tr>
+                    <tr th:each="storage:${searches}">
+                        <td th:text="${storage.id}"></td>
+                        <td th:text="${storage.storeZipCode}"></td>
+                    </tr>
+                </table>
+
 
 
             </div>
